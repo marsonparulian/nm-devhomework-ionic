@@ -8,7 +8,9 @@
 
     <script src="https://unpkg.com/vue@3"></script>
 
-    <div id="app">{{ message }}</div>
+    <div id="app">
+        <input v-model="filter" placeholder="Filter movies.." />
+    </div>
 
     <script>
         const { createApp } = Vue
@@ -16,7 +18,8 @@
         createApp({
             data() {
                 return {
-                    message: 'Hello Vue!'
+                    message: 'Hello Vue!',
+                    filterText: '',
                 }
             }
         }).mount('#app')
