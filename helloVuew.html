@@ -9,7 +9,18 @@
     <script src="https://unpkg.com/vue@3"></script>
 
     <div id="app">
-        <input v-model="filter" placeholder="Filter movies.." />
+        <main>
+            <div id="movies-filter">
+                <input v-model="filterText" placeholder="Filter movies.." />
+            </div>
+            <div id="movie-list">
+                <h2>Movies</h2>
+                <div v-for="m in movies">
+                    <h3>{{m.title}}</h3>
+                    <div>{{ m.shortDesc }}</div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
@@ -20,6 +31,10 @@
                 return {
                     message: 'Hello Vue!',
                     filterText: '',
+                    movies: [
+                        { title: 'Apple', shortDesc: 'Short description of this movie.' },
+                        { title: 'Watermelon', shortDesc: 'Another short description..' },
+                    ],
                 }
             }
         }).mount('#app')
