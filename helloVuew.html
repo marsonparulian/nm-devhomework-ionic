@@ -13,20 +13,24 @@
             <div id="movies-filter">
                 <input v-model="filterText" placeholder="Filter movies.." />
             </div>
+
             <div id="movie-list">
                 <h2>Movies</h2>
                 <div v-for="m in filteredMovies">
-                    <h3>{{m.title}}</h3>
-                    <div>{{ m.shortDesc }}</div>
+                    <movie-compact :title="m.title" :shortDesc="m.shortDesc"></movie-compact>
                 </div>
             </div>
         </main>
     </div>
 
-    <script>
+    <script type="module">
         const { createApp, computed } = Vue;
+        import MovieCompact from './MovieCompact.js';
 
         createApp({
+            components: {
+                MovieCompact,
+            },
             data() {
                 return {
                     message: 'Hello Vue!',
@@ -46,7 +50,7 @@
                         return this.movies.filter((m) => {
                             return m.title.match(p);
                         });
-                }),
+                    }),
                 };
             }
         }).mount('#app')
