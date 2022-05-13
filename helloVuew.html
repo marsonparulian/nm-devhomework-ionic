@@ -15,7 +15,7 @@
             </div>
             <div id="movie-list">
                 <h2>Movies</h2>
-                <div v-for="m in movies">
+                <div v-for="m in filteredMovies">
                     <h3>{{m.title}}</h3>
                     <div>{{ m.shortDesc }}</div>
                 </div>
@@ -24,7 +24,7 @@
     </div>
 
     <script>
-        const { createApp } = Vue
+        const { createApp, computed } = Vue;
 
         createApp({
             data() {
@@ -35,7 +35,19 @@
                         { title: 'Apple', shortDesc: 'Short description of this movie.' },
                         { title: 'Watermelon', shortDesc: 'Another short description..' },
                     ],
-                }
+                    filteredMovies: computed(() => {
+                        const t = this.filterText.trim();
+
+                        // Return all `movies` if filter text is falsy.
+                        if (!t) return this.movies;
+
+                        // Apply filter
+                        const p = new RegExp(this.filterText, 'i');
+                        return this.movies.filter((m) => {
+                            return m.title.match(p);
+                        });
+                }),
+                };
             }
         }).mount('#app')
     </script>
