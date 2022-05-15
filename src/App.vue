@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import HelloVue from './components/HelloVue.vue';
 import ItemList from './components/ItemList.vue';
 
@@ -10,6 +10,17 @@ const hellovues = ref([
   { lang: 'Spanish', text: 'Hola Vue' },
   { lang: 'Pirates', text: 'Ahoy Vue' },
 ]);
+
+const filteredhellovues = computed(() => {
+  const t = filterText.value.trim();
+  if (!filterText) {
+    return hellovues.value;
+  }
+  const p = new RegExp(t, 'i');
+  return hellovues.value.filter((h) => {
+    return h.lang.match(p);
+  });
+});
 </script>
 
 <template>
@@ -25,7 +36,7 @@ const hellovues = ref([
     <form id="filter-form">
       <input v-model="filterText" placeholder="Type to filter languages.." />
     </form>
-    <ItemList :hellovues="hellovues" />
+    <ItemList :hellovues="filteredhellovues" />
   </main>
 </template>
 
