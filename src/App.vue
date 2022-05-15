@@ -1,6 +1,9 @@
 <script setup>
+import { ref } from 'vue';
 import HelloVue from './components/HelloVue.vue';
 import ItemList from './components/ItemList.vue';
+
+const filterText = ref('');
 </script>
 
 <template>
@@ -14,7 +17,7 @@ import ItemList from './components/ItemList.vue';
 
   <main>
     <form id="filter-form">
-      this is filter forms
+      <input v-model="filterText" placeholder="Type to filter languages.." />
     </form>
     <ItemList />
   </main>
