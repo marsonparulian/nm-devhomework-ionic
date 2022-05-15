@@ -4,6 +4,12 @@ import HelloVue from './components/HelloVue.vue';
 import ItemList from './components/ItemList.vue';
 
 const filterText = ref('');
+const hellovues = ref([
+  { lang: 'English', text: 'Hello Vue' },
+  { lang: 'Indonesian', text: 'Halo Vue' },
+  { lang: 'Spanish', text: 'Hola Vue' },
+  { lang: 'Pirates', text: 'Ahoy Vue' },
+]);
 </script>
 
 <template>
@@ -19,7 +25,7 @@ const filterText = ref('');
     <form id="filter-form">
       <input v-model="filterText" placeholder="Type to filter languages.." />
     </form>
-    <ItemList />
+    <ItemList :hellovues="hellovues" />
   </main>
 </template>
 
