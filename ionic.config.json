@@ -1,0 +1,7 @@
+{
+  "name": "nm-devhomework-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
