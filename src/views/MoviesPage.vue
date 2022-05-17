@@ -12,7 +12,9 @@
                     <ion-title size="large">Movie List</ion-title>
                 </ion-toolbar>
             </ion-header>
-
+            <!-- movies filter -->
+            <movies-filter></movies-filter>
+            <!-- movie list-->
             <div>
                 <div v-for="movie in movies" :key="movie.Id">
                     <h3>{{ movie.Name }}</h3>
@@ -30,6 +32,7 @@
 import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import * as nowShowingJson from '../../tests/data/now-showing.json';
+import MoviesFilter from "./MoviesFilter.vue"; 
 
 export default defineComponent({
     name: 'MoviesPage',
@@ -40,7 +43,7 @@ export default defineComponent({
             movies,
         };
     },
-    components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    components: { MoviesFilter, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
     methods: {
         async fetchMovies() {
             const url = 'https://www.eventcinemas.com.au/Movies/GetNowShowing';
