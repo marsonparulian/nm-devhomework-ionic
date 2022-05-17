@@ -13,18 +13,44 @@
                 </ion-toolbar>
             </ion-header>
 
-            <div>List of movies..</div>
-
+            <div>
+                <div v-for="movie in movies" :key="movie.Id">
+                    <h3>{{ movie.Name }}</h3>
+                    <div>Genres :<span v-for="g in movie.MovieGenres" :key="g.Id">{{ g.Name }}</span> </div>
+                    <div>Director : {{ movie.Director }}</div>
+                    <h4>Synopsis :</h4>
+                    <div>{{ movie.Synopsis }}</div>
+                </div>
+            </div>
         </ion-content>
     </ion-page>
 </template>
 
-<script lang="ts">
+<script lang="ts"  >
 import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import * as nowShowingJson from '../../tests/data/now-showing.json';
 
 export default defineComponent({
     name: 'MoviesPage',
-    components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+    data() {
+        // const movies: { Id: string }[] = [];
+        const movies: any = [];
+        return {
+            movies,
+        };
+    },
+    components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    methods: {
+        async fetchMovies() {
+            const url = 'https://www.eventcinemas.com.au/Movies/GetNowShowing';
+            return nowShowingJson.Data.Movies;
+        }
+    },
+    created() {
+        this.fetchMovies()
+            .then(movies => this.movies = movies);
+    }
 });
+
 </script>
