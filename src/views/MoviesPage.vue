@@ -13,7 +13,7 @@
                 </ion-toolbar>
             </ion-header>
             <!-- movies filter -->
-            <movies-filter :genres="genres"></movies-filter>
+            <movies-filter :genres="genres" @submit="filterMovies"></movies-filter>
             <!-- movie list-->
             <div>
                 <div v-for="movie in movies" :key="movie.Id">
@@ -47,6 +47,9 @@ export default defineComponent({
     },
     components: { MoviesFilter, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
     methods: {
+        filterMovies() {
+            console.log('after submit');
+        },
         async fetchMovies() {
             const url = 'https://www.eventcinemas.com.au/Movies/GetNowShowing';
             return nowShowingJson.Data.Movies;
