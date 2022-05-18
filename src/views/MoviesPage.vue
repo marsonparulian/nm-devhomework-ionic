@@ -13,10 +13,10 @@
                 </ion-toolbar>
             </ion-header>
             <!-- movies filter -->
-            <movies-filter :genres="genres" @submit="filterMovies"></movies-filter>
+            <movies-filter :genres="genres" @submit="updateMovieFilter"></movies-filter>
             <!-- movie list-->
             <div>
-                <div v-for="movie in movies" :key="movie.Id">
+                <div v-for="movie in filteredMovies" :key="movie.Id">
                     <h3>{{ movie.Name }}</h3>
                     <div>Genres :<span v-for="g in movie.MovieGenres" :key="g.Id">{{ g.Name }}</span> </div>
                     <div>Director : {{ movie.Director }}</div>
@@ -33,22 +33,33 @@ import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import * as nowShowingJson from '../../tests/data/now-showing.json';
 import MoviesFilter from "./MoviesFilter.vue";
+import { MovieFilterInterface } from '@/types/common';
 
 export default defineComponent({
     name: 'MoviesPage',
     data() {
-        // const movies: { Id: string }[] = [];
         const movies: any = [];
         const genres: any = [];
+        const movieFilter: MovieFilterInterface = {
+            genre: 'all',
+        };
         return {
             movies,
             genres,
+            movieFilter,
         };
     },
     components: { MoviesFilter, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    computed: {
+        filteredMovies(): any {
+            return this.movieFilter.genre == 'all' ?
+                this.movies :
+                this.movies.filter((m: any) => m.Genres === this.movieFilter.genre);
+        }
+    },
     methods: {
-        filterMovies() {
-            console.log('after submit');
+        updateMovieFilter(filter: MovieFilterInterface) {
+            this.movieFilter = filter;
         },
         async fetchMovies() {
             const url = 'https://www.eventcinemas.com.au/Movies/GetNowShowing';

@@ -2,7 +2,7 @@
     <form id="filter-movies-form">
         <h2>Filter movies</h2>
         <ion-label for="select-genre">Filter by Genre :</ion-label>
-        <select id="select-genre" @change="$emit('submit')">
+        <select id="select-genre" @change="submit">
             <option value="all">All genres</option>
             <option v-for="genre in genres" :key="genre.code" :value="genre.code">{{
                     genre.name
@@ -25,5 +25,10 @@ export default defineComponent({
     },
     components: { IonLabel },
     emits: ['submit'],
+    methods: {
+        submit(e: any) {
+            this.$emit('submit', { genre: e.target.value });
+        }
+    }
 });
 </script>
