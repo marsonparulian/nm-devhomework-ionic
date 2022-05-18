@@ -13,7 +13,7 @@
                 </ion-toolbar>
             </ion-header>
             <!-- movies filter -->
-            <movies-filter></movies-filter>
+            <movies-filter :genres="genres"></movies-filter>
             <!-- movie list-->
             <div>
                 <div v-for="movie in movies" :key="movie.Id">
@@ -32,15 +32,17 @@
 import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import * as nowShowingJson from '../../tests/data/now-showing.json';
-import MoviesFilter from "./MoviesFilter.vue"; 
+import MoviesFilter from "./MoviesFilter.vue";
 
 export default defineComponent({
     name: 'MoviesPage',
     data() {
         // const movies: { Id: string }[] = [];
         const movies: any = [];
+        const genres: any = [];
         return {
             movies,
+            genres,
         };
     },
     components: { MoviesFilter, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
@@ -48,9 +50,13 @@ export default defineComponent({
         async fetchMovies() {
             const url = 'https://www.eventcinemas.com.au/Movies/GetNowShowing';
             return nowShowingJson.Data.Movies;
+        },
+        async fetchGenres() {
+            return nowShowingJson.Data.Genres;
         }
     },
     created() {
+        this.fetchGenres().then(genres => this.genres = genres).catch(e => console.error('Error fetching genres.'));
         this.fetchMovies()
             .then(movies => this.movies = movies);
     }

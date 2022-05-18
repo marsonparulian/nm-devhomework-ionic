@@ -1,8 +1,12 @@
 <template>
     <form id="filter-movies-form">
         <h2>Filter movies</h2>
-        <ion-label>Genre</ion-label>
-        TODO : list of genre
+        <ion-label for="select-genre">Filter by Genre :</ion-label>
+        <select id="select-genre">
+            <option value="all">All genres</option>
+            <option v-for="genre in genres" :key="genre.code">{{ genre.name }}</option>
+        </select>
+        <hr />
     </form>
 </template>
 
@@ -10,8 +14,13 @@
 import { defineComponent } from 'vue';
 import { IonLabel } from '@ionic/vue';
 
+const genres: any = [];
+
 export default defineComponent({
     name: 'MoviesFilter',
+    props: {
+        genres,
+    },
     components: { IonLabel },
 });
 </script>
