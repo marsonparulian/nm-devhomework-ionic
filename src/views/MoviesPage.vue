@@ -15,15 +15,7 @@
             <!-- movies filter -->
             <movies-filter :genres="genres" @submit="updateMovieFilter"></movies-filter>
             <!-- movie list-->
-            <div>
-                <div v-for="movie in filteredMovies" :key="movie.Id">
-                    <h3>{{ movie.Name }}</h3>
-                    <div>Genres :<span v-for="g in movie.MovieGenres" :key="g.Id">{{ g.Name }}</span> </div>
-                    <div>Director : {{ movie.Director }}</div>
-                    <h4>Synopsis :</h4>
-                    <div>{{ movie.Synopsis }}</div>
-                </div>
-            </div>
+            <movie-view v-for="movie in filteredMovies" v-bind="movie" :key="movie.Id"></movie-view>
         </ion-content>
     </ion-page>
 </template>
@@ -33,6 +25,7 @@ import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import * as nowShowingJson from '../../tests/data/now-showing.json';
 import MoviesFilter from "./MoviesFilter.vue";
+import MovieView from './MovieView.vue';
 import { MovieFilterInterface } from '@/types/common';
 
 export default defineComponent({
@@ -49,7 +42,7 @@ export default defineComponent({
             movieFilter,
         };
     },
-    components: { MoviesFilter, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    components: { MovieView, MoviesFilter, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
     computed: {
         filteredMovies(): any {
             return this.movieFilter.genre == 'all' ?
