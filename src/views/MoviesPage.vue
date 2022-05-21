@@ -1,4 +1,3 @@
-
 <template>
     <ion-page>
         <ion-header>
@@ -27,6 +26,7 @@ import * as nowShowingJson from '../../tests/data/now-showing.json';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieView from './MovieView.vue';
 import { MovieFilterInterface } from '@/types/common';
+import MoviesService from '../services/MoviesService';
 
 export default defineComponent({
     name: 'MoviesPage',
@@ -62,10 +62,14 @@ export default defineComponent({
             return nowShowingJson.Data.Genres;
         }
     },
-    created() {
-        this.fetchGenres().then(genres => this.genres = genres).catch(e => console.error('Error fetching genres.'));
-        this.fetchMovies()
-            .then(movies => this.movies = movies);
+    async created() {
+        // Fetch data from server
+        const data = await MoviesService.fetchCurrent();
+        ({ Movies: this.movies, Genres: this.genres } = data);
+
+        // this.fetchGenres().then(genres => this.genres = genres).catch(e => console.error('Error fetching genres.'));
+        // this.fetchMovies()
+        //     .then(movies => this.movies = movies);
     }
 });
 
