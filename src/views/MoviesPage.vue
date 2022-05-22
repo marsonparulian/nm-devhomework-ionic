@@ -11,6 +11,9 @@
                     <ion-title size="large">Movie List</ion-title>
                 </ion-toolbar>
             </ion-header>
+
+            <ion-loading :is-open="isBusy" message="Fetching movies.." :duration="240e3">
+            </ion-loading>
             <!-- movies filter -->
             <movies-filter :genres="genres" @submit="updateMovieFilter"></movies-filter>
             <!-- movie list-->
@@ -21,7 +24,7 @@
 
 <script lang="ts"  >
 import { defineComponent } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import * as nowShowingJson from '../../tests/data/now-showing.json';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieView from './MovieView.vue';
@@ -37,12 +40,13 @@ export default defineComponent({
             genre: 'all',
         };
         return {
+            isBusy: true, // Is this page currently busy ?
             movies,
             genres,
             movieFilter,
         };
     },
-    components: { MovieView, MoviesFilter, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    components: { MovieView, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
     computed: {
         filteredMovies(): any {
             return this.movieFilter.genre == 'all' ?
@@ -66,10 +70,7 @@ export default defineComponent({
         // Fetch data from server
         const data = await MoviesService.fetchCurrent();
         ({ Movies: this.movies, Genres: this.genres } = data);
-
-        // this.fetchGenres().then(genres => this.genres = genres).catch(e => console.error('Error fetching genres.'));
-        // this.fetchMovies()
-        //     .then(movies => this.movies = movies);
+        this.isBusy = false;
     }
 });
 
