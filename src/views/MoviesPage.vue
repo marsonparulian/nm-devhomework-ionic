@@ -25,7 +25,6 @@
 <script lang="ts"  >
 import { defineComponent } from 'vue';
 import { IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import * as nowShowingJson from '../../tests/data/now-showing.json';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieView from './MovieView.vue';
 import { MovieFilterInterface } from '@/types/common';
@@ -65,14 +64,6 @@ export default defineComponent({
             ({ Movies: this.movies, Genres: this.genres } = data);
             this.isBusy = false;
         },
-        async fetchMovies() {
-
-            const url = 'https://www.eventcinemas.com.au/Movies/GetNowShowing';
-            return nowShowingJson.Data.Movies;
-        },
-        async fetchGenres() {
-            return nowShowingJson.Data.Genres;
-        }
     },
     async created() {
         this.fetchData();
