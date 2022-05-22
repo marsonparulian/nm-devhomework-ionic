@@ -20,13 +20,6 @@
         </ion-card-content>
     </ion-card>
 </template>
-<style>
-img.poster {
-    float: left;
-    margin: 0 20px 20px 0;
-    width: 250px;
-}
-</style>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
