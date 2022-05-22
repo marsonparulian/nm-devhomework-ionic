@@ -58,7 +58,15 @@ export default defineComponent({
         updateMovieFilter(filter: MovieFilterInterface) {
             this.movieFilter = filter;
         },
+        async fetchData() {
+            this.isBusy = true;
+            // Fetch data from server
+            const data = await MoviesService.fetchCurrent();
+            ({ Movies: this.movies, Genres: this.genres } = data);
+            this.isBusy = false;
+        },
         async fetchMovies() {
+
             const url = 'https://www.eventcinemas.com.au/Movies/GetNowShowing';
             return nowShowingJson.Data.Movies;
         },
@@ -67,10 +75,8 @@ export default defineComponent({
         }
     },
     async created() {
-        // Fetch data from server
-        const data = await MoviesService.fetchCurrent();
-        ({ Movies: this.movies, Genres: this.genres } = data);
-        this.isBusy = false;
+        this.fetchData();
+
     }
 });
 
