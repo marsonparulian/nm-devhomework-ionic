@@ -10,15 +10,12 @@
             <ion-card-subtitle>Main casts : {{ MainCast || '-' }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-            <div>
-                <h4>Synopsis</h4>
-                {{ Synopsis }}
-            </div>
-            <hr />
-            <div>
-                <div>Released at : {{ ReleasedAt }}</div>
-                <div>Running time : {{ RunningTime }}</div>
-            </div>
+            <h4>Synopsis</h4>
+            {{ Synopsis }}
+        </ion-card-content>
+        <ion-card-content>
+            <div>Released at : {{ ReleasedAt }}</div>
+            <div>Running time : {{ RunningTime }}</div>
         </ion-card-content>
     </ion-card>
 </template>
