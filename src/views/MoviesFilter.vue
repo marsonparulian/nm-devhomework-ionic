@@ -1,6 +1,6 @@
 <template>
     <form id="filter-movies-form">
-        <h2>Filter movies</h2>
+        <h2 class="sr-only">Filter Movies Form</h2>
         <ion-list>
             <ion-item>
                 <ion-label>Filter by genre :</ion-label>
