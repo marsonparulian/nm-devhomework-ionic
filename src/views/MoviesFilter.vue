@@ -1,20 +1,23 @@
 <template>
     <form id="filter-movies-form">
         <h2>Filter movies</h2>
-        <ion-label for="select-genre">Filter by Genre :</ion-label>
-        <select id="select-genre" @change="submit">
-            <option value="all">All genres</option>
-            <option v-for="genre in genres" :key="genre.code" :value="genre.code">{{
-                    genre.name
-            }}</option>
-        </select>
-        <hr />
+        <ion-list>
+            <ion-item>
+                <ion-label>Filter by genre :</ion-label>
+                <ion-select id="select-genre" @ionChange="submit">
+                    <ion-select-option value="all">All genres</ion-select-option>
+                    <ion-select-option v-for="g in genres" :key="g.code" :value="g.code">
+                        {{ g.name }}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
     </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonLabel } from '@ionic/vue';
+import { IonSelect, IonSelectOption, IonItem, IonList, IonLabel } from '@ionic/vue';
 
 const genres: any = Array;
 
@@ -23,7 +26,7 @@ export default defineComponent({
     props: {
         genres,
     },
-    components: { IonLabel },
+    components: { IonSelect, IonSelectOption, IonItem, IonList, IonLabel },
     emits: ['submit'],
     methods: {
         submit(e: any) {
@@ -32,3 +35,10 @@ export default defineComponent({
     }
 });
 </script>
+
+<style>
+#filter-movies-form {
+    max-width: 350px;
+    margin: auto;
+}
+</style>
