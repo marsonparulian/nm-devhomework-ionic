@@ -14,8 +14,9 @@
             {{ Synopsis }}
         </ion-card-content>
         <ion-card-content>
-            <div>Released at : {{ ReleasedAt }}</div>
-            <div>Running time : {{ RunningTime }}</div>
+            <div>Released at : {{ ReleasedAt ? new Date(Date.parse(ReleasedAt)).toLocaleDateString('en-AU') : '-' }}
+            </div>
+            <div>Running time : {{ `${RunningTime} minutes` || '-' }}</div>
         </ion-card-content>
     </ion-card>
 </template>
