@@ -4,7 +4,7 @@
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="movies" href="/tabs/movies">
-          <ion-icon :icon="triangle" />
+          <ion-icon :icon="videocamOutline" />
           <ion-label>Movies</ion-label>
         </ion-tab-button>
 
@@ -30,13 +30,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { videocamOutline, ellipse, square, triangle } from 'ionicons/icons';
 
 export default defineComponent({
   name: 'TabsPage',
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
   setup() {
     return {
+      videocamOutline,
       ellipse,
       square,
       triangle,
