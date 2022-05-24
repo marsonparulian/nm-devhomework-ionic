@@ -1,5 +1,6 @@
 <template>
     <ion-card>
+        <ion-progress-bar v-if="posterFetchStatus === 2" type="indeterminate"></ion-progress-bar>
         <img v-if="poster" :src="poster" />
         <ion-card-header>
             <ion-chip :disabled="true" v-for="g in MovieGenres" :key="g.Id">
@@ -23,13 +24,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonChip, IonLabel, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/vue';
+import { IonProgressBar, IonChip, IonLabel, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/vue';
+import { FetchStatus } from '../types/common';
 
 const movieGenres: any = Array;
 
 export default defineComponent({
     name: 'MovieView',
-    components: { IonChip, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent },
+    components: { IonProgressBar, IonChip, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent },
     props: {
         Name: String,
         Director: String,
@@ -40,6 +42,7 @@ export default defineComponent({
         MainCast: String,
         SkinMobileUrl: String,
         poster: String,
+        posterFetchStatus: Number,
     },
 });
 </script>
