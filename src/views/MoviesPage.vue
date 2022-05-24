@@ -14,6 +14,13 @@
 
             <ion-loading :is-open="isBusy" message="Fetching movies.." :duration="240e3">
             </ion-loading>
+            <!-- FAB -->
+            <ion-fab vertical="top" horizontal="end" slot="fixed">
+                <ion-fab-button>
+                    <ion-icon :icon="refreshOutline"></ion-icon>
+                </ion-fab-button>
+            </ion-fab>
+
             <!-- movies filter -->
             <movies-filter :genres="genres" @submit="updateMovieFilter"></movies-filter>
             <!-- movie list-->
@@ -24,7 +31,8 @@
 
 <script lang="ts"  >
 import { defineComponent } from 'vue';
-import { IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { refreshOutline } from 'ionicons/icons';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieView from './MovieView.vue';
 import { MovieFilterInterface } from '@/types/common';
@@ -39,13 +47,14 @@ export default defineComponent({
             genre: 'all',
         };
         return {
+            refreshOutline, // icon
             isBusy: true, // Is this page currently busy ?
             movies,
             genres,
             movieFilter,
         };
     },
-    components: { MovieView, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    components: { IonIcon, IonFab, IonFabButton, MovieView, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
     computed: {
         filteredMovies(): any {
             return this.movieFilter.genre == 'all' ?
