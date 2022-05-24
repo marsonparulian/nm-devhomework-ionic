@@ -16,7 +16,7 @@
             </ion-loading>
             <!-- FAB -->
             <ion-fab vertical="top" horizontal="end" slot="fixed">
-                <ion-fab-button>
+                <ion-fab-button @click="fetchData">
                     <ion-icon :icon="refreshOutline"></ion-icon>
                 </ion-fab-button>
             </ion-fab>
