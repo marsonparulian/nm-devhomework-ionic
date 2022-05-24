@@ -35,15 +35,9 @@ import { IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolb
 import { refreshOutline } from 'ionicons/icons';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieView from './MovieView.vue';
-import { MovieFilterInterface } from '../types/common';
+import { MovieFilterInterface } from '../types/common.d';
+import { FetchStatus } from '../types/common';
 import MoviesService from '../services/MoviesService';
-
-enum FetchStatus {
-    Initial = 1,
-    Fetching = 2,
-    FetchedSuccess = 3,
-    FetchedFailure = 4,
-}
 
 export default defineComponent({
     name: 'MoviesPage',
