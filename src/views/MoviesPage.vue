@@ -35,8 +35,15 @@ import { IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolb
 import { refreshOutline } from 'ionicons/icons';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieView from './MovieView.vue';
-import { MovieFilterInterface } from '@/types/common';
+import { MovieFilterInterface } from '../types/common';
 import MoviesService from '../services/MoviesService';
+
+enum FetchStatus {
+    Initial = 1,
+    Fetching = 2,
+    FetchedSuccess = 3,
+    FetchedFailure = 4,
+}
 
 export default defineComponent({
     name: 'MoviesPage',
@@ -71,7 +78,36 @@ export default defineComponent({
             // Fetch data from server
             const data = await MoviesService.fetchCurrent();
             ({ Movies: this.movies, Genres: this.genres } = data);
+
+            // Additional attributes
+            this.movies.forEach((m: any) => {
+                m.poster = null;
+                m.posterFetchStatus = FetchStatus.Initial;
+            });
+
             this.isBusy = false;
+            this.fetchNextMoviePoster();
+        },
+        async fetchNextMoviePoster() {
+            let nextMovie = this.movies.find((m: any) => {
+                return m.posterFetchStatus === FetchStatus.Initial;
+            });
+            // Stop if allposters is being or has been fetched.
+            if (!nextMovie) return;
+
+            // Fetch the poster
+            nextMovie.posterFetchStatus = FetchStatus.Fetching;
+            const response = await fetch(nextMovie.SkinMobileUrl);
+            if (response.ok) {
+                nextMovie.posterFetchStatus = FetchStatus.FetchedSuccess;
+                nextMovie.poster = nextMovie.SkinMobileUrl;
+            } else {
+                nextMovie.posterFetchStatus = FetchStatus.FetchedFailure;
+                nextMovie.poster = '';
+            }
+
+            // Fetch next poster
+            this.fetchNextMoviePoster();
         },
     },
     async created() {

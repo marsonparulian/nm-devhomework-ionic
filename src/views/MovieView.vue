@@ -1,6 +1,6 @@
 <template>
     <ion-card>
-        <img :src="SkinMobileUrl" />
+        <img v-if="poster" :src="poster" />
         <ion-card-header>
             <ion-chip :disabled="true" v-for="g in MovieGenres" :key="g.Id">
                 <ion-label>{{ g.Name }}</ion-label>
@@ -39,6 +39,7 @@ export default defineComponent({
         RunningTime: Number,
         MainCast: String,
         SkinMobileUrl: String,
+        poster: String,
     },
 });
 </script>
