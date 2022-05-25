@@ -3,7 +3,7 @@
         <ion-progress-bar v-if="posterFetchStatus === 2" type="indeterminate"></ion-progress-bar>
         <img v-if="poster" :src="poster" />
         <ion-card-header>
-            <ion-chip :disabled="true" v-for="g in MovieGenres" :key="g.Id">
+            <ion-chip v-for="g in MovieGenres" :key="g.Id" :routerLink="`/tabs/movies/${g.Name.toLowerCase()}`">
                 <ion-label>{{ g.Name }}</ion-label>
             </ion-chip>
             <ion-card-title>{{ Name }}</ion-card-title>
