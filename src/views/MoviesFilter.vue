@@ -4,7 +4,7 @@
         <ion-list>
             <ion-item>
                 <ion-label>Filter by genre :</ion-label>
-                <ion-select id="select-genre" @ionChange="submit">
+                <ion-select id="select-genre" :value="selectedGenre" @ionChange="submit">
                     <ion-select-option value="all">All genres</ion-select-option>
                     <ion-select-option v-for="g in genres" :key="g.code" :value="g.code">
                         {{ g.name }}
@@ -25,6 +25,7 @@ export default defineComponent({
     name: 'MoviesFilter',
     props: {
         genres,
+        selectedGenre: String,
     },
     components: { IonSelect, IonSelectOption, IonItem, IonList, IonLabel },
     emits: ['submit'],

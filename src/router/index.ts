@@ -20,6 +20,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/MoviesPage.vue')
       },
       {
+        path: 'movies/:genre',
+        component: () => import('@/views/MoviesPage.vue')
+      },
+      {
         path: 'tab1',
         component: () => import('@/views/Tab1Page.vue')
       },

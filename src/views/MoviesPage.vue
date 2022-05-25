@@ -2,7 +2,7 @@
     <ion-page>
         <ion-header>
             <ion-toolbar>
-                <ion-title>Movies</ion-title>
+                <ion-title>Movies : {{ genre }}</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content :fullscreen="true">
@@ -22,7 +22,8 @@
             </ion-fab>
 
             <!-- movies filter -->
-            <movies-filter :genres="genres" @submit="updateMovieFilter"></movies-filter>
+            <movies-filter :genres="genres" @submit="updateMovieFilter" :selectedGenre="movieFilter.genre">
+            </movies-filter>
             <!-- movie list-->
             <movie-view v-for="movie in filteredMovies" v-bind="movie" :key="movie.Id"></movie-view>
         </ion-content>
@@ -41,11 +42,16 @@ import MoviesService from '../services/MoviesService';
 
 export default defineComponent({
     name: 'MoviesPage',
+    props: {
+        genre: String,
+    },
     data() {
         const movies: any = [];
         const genres: any = [];
+        const defaultGenre = 'all';
+        const selectedGenre = typeof this.$route.params.genre === 'string' ? this.$route.params.genre : defaultGenre;
         const movieFilter: MovieFilterInterface = {
-            genre: 'all',
+            genre: selectedGenre || defaultGenre,
         };
         return {
             refreshOutline, // icon
