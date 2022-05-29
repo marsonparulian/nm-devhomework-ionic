@@ -100,10 +100,10 @@ export default defineComponent({
 
             // Fetch the poster
             nextMovie.posterFetchStatus = FetchStatus.Fetching;
-            const response = await fetch(nextMovie.SkinMobileUrl);
+            const response = await fetch(nextMovie.LargePosterUrl);
             if (response.ok) {
                 nextMovie.posterFetchStatus = FetchStatus.FetchedSuccess;
-                nextMovie.poster = nextMovie.SkinMobileUrl;
+                nextMovie.poster = nextMovie.LargePosterUrl;
             } else {
                 nextMovie.posterFetchStatus = FetchStatus.FetchedFailure;
                 nextMovie.poster = '';
