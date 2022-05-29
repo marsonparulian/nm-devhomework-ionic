@@ -1,8 +1,8 @@
 <template >
     <ion-grid>
         <ion-row>
-            <ion-col v-for="m in movies">
-                <movie-view v-for="movie in movies" v-bind="movie" :key="movie.Id"></movie-view>
+            <ion-col size="12" size-md="6" size-lg="4" size-xl="3" v-for="movie in movies" :key="movie.Id">
+                <movie-view v-bind="movie"></movie-view>
             </ion-col>
         </ion-row>
     </ion-grid>
