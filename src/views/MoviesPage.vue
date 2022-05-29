@@ -86,6 +86,9 @@ export default defineComponent({
             });
 
             this.isBusy = false;
+
+            // Fetch the next 2 movie posters
+            this.fetchNextMoviePoster();
             this.fetchNextMoviePoster();
         },
         async fetchNextMoviePoster() {
