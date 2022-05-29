@@ -25,7 +25,7 @@
             <movies-filter :genres="genres" @submit="updateMovieFilter" :selectedGenre="movieFilter.genre">
             </movies-filter>
             <!-- movie list-->
-            <movie-view v-for="movie in filteredMovies" v-bind="movie" :key="movie.Id"></movie-view>
+            <movie-list :movies="filteredMovies"></movie-list>
         </ion-content>
     </ion-page>
 </template>
@@ -36,6 +36,7 @@ import { IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolb
 import { refreshOutline } from 'ionicons/icons';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieView from './MovieView.vue';
+import MovieList from '@/components/MovieList.vue';
 import { MovieFilterInterface } from '../types/common.d';
 import { FetchStatus } from '../types/common';
 import MoviesService from '../services/MoviesService';
@@ -117,3 +118,4 @@ export default defineComponent({
 });
 
 </script>
+<movi
