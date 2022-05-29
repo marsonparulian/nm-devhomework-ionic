@@ -35,7 +35,6 @@ import { defineComponent } from 'vue';
 import { IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import { refreshOutline } from 'ionicons/icons';
 import MoviesFilter from "./MoviesFilter.vue";
-import MovieView from './MovieView.vue';
 import MovieList from '@/components/MovieList.vue';
 import { MovieFilterInterface } from '../types/common.d';
 import { FetchStatus } from '../types/common';
@@ -62,7 +61,7 @@ export default defineComponent({
             movieFilter,
         };
     },
-    components: { IonIcon, IonFab, IonFabButton, MovieView, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    components: { IonIcon, IonFab, IonFabButton, MovieList, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
     computed: {
         filteredMovies(): any {
             return this.movieFilter.genre == 'all' ?
@@ -118,4 +117,3 @@ export default defineComponent({
 });
 
 </script>
-<movi
