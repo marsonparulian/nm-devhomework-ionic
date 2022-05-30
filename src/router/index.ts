@@ -5,7 +5,7 @@ import TabsPage from '../views/TabsPage.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/tabs/movies'
+    redirect: '/tabs/now-showing'
   },
   {
     path: '/tabs/',
@@ -13,15 +13,23 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/tabs/movies'
+        redirect: '/tabs/now-showing'
       },
       {
-        path: 'movies',
-        component: () => import('@/views/MoviesPage.vue')
+        path: 'now-showing',
+        component: () => import('@/views/NowShowing.vue')
       },
       {
-        path: 'movies/:genre',
-        component: () => import('@/views/MoviesPage.vue')
+        path: 'now-showing/:genre',
+        component: () => import('@/views/NowShowing.vue')
+      },
+      {
+        path: 'coming-soon',
+        component: () => import('@/views/ComingSoon.vue')
+      },
+      {
+        path: 'coming-soon/:genre',
+        component: () => import('@/views/ComingSoon.vue')
       },
       {
         path: 'tab1',

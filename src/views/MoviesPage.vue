@@ -2,7 +2,7 @@
     <ion-page>
         <ion-header>
             <ion-toolbar>
-                <ion-title>Movies</ion-title>
+                <ion-title>{{ title }}</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content :fullscreen="true">
@@ -38,12 +38,14 @@ import MoviesFilter from "./MoviesFilter.vue";
 import MovieList from '@/components/MovieList.vue';
 import { MovieFilterInterface } from '../types/common.d';
 import { FetchStatus } from '../types/common';
-import MoviesService from '../services/MoviesService';
+import { get } from '@/services/MoviesService';
 
 export default defineComponent({
     name: 'MoviesPage',
     props: {
         genre: String,
+        title: String,
+        url: String,
     },
     data() {
         const movies: any = [];
@@ -76,7 +78,13 @@ export default defineComponent({
         async fetchData() {
             this.isBusy = true;
             // Fetch data from server
-            const data = await MoviesService.fetchCurrent();
+            // const data = await MoviesService.fetchCurrent();
+            console.log(`this.url : ${this.url}`);
+            if (!this.url) {
+                console.error('url is falsy');
+                throw new Error('URL is falsy');
+            }
+            const data = await get(this.url);
             ({ Movies: this.movies, Genres: this.genres } = data);
 
             // Additional attributes

@@ -3,9 +3,14 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="movies" href="/tabs/movies">
+        <ion-tab-button tab="now-showing" href="/tabs/now-showing">
           <ion-icon :icon="videocamOutline" />
-          <ion-label>Movies</ion-label>
+          <ion-label>Now Showing</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="coming-soon" href="/tabs/coming-soon">
+          <ion-icon :icon="videocamOutline" />
+          <ion-label>Coming Soon</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="tab1" href="/tabs/tab1">
