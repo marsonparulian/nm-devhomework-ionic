@@ -13,7 +13,7 @@
           <ion-label>Coming Soon</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab1" href="/tabs/tab1">
+        <!-- <ion-tab-button tab="tab1" href="/tabs/tab1">
           <ion-icon :icon="triangle" />
           <ion-label>Tab 1</ion-label>
         </ion-tab-button>
@@ -27,6 +27,8 @@
           <ion-icon :icon="square" />
           <ion-label>Ion Components</ion-label>
         </ion-tab-button>
+         -->
+
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
