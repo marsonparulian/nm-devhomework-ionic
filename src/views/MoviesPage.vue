@@ -114,7 +114,7 @@ export default defineComponent({
                 nextMovie.poster = nextMovie.LargePosterUrl;
             } else {
                 nextMovie.posterFetchStatus = FetchStatus.FetchedFailure;
-                nextMovie.poster = '';
+                nextMovie.poster = 'https://cdn.eventcinemas.com.au/cdn/content/img/unavailable_poster105x50.jpg';
             }
 
             // Fetch next poster
