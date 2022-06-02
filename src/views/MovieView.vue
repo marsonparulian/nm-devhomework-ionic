@@ -6,7 +6,7 @@
             <ion-chip v-for="g in MovieGenres" :key="g.Id" :routerLink="`/tabs/movies/${g.Name.toLowerCase()}`">
                 <ion-label>{{ g.Name }}</ion-label>
             </ion-chip>
-            <ion-card-title>{{ Name }}</ion-card-title>
+            <ion-card-title  @Click="$emit('movieSelected', Id)">{{ Name }}</ion-card-title>
             <ion-card-subtitle>Director : {{ Director || '-' }}</ion-card-subtitle>
             <ion-card-subtitle>Main casts : {{ MainCast || '-' }}</ion-card-subtitle>
         </ion-card-header>
@@ -34,7 +34,9 @@ const movieGenres: any = Array;
 export default defineComponent({
     name: 'MovieView',
     components: { IonProgressBar, IonChip, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent },
+    emits: ['movieSelected'],
     props: {
+        Id: Number,
         Name: String,
         Director: String,
         Synopsis: String,

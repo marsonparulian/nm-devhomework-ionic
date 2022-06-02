@@ -25,7 +25,7 @@
             <movies-filter :genres="genres" @submit="updateMovieFilter" :selectedGenre="movieFilter.genre">
             </movies-filter>
             <!-- movie list-->
-            <movie-list :movies="filteredMovies"></movie-list>
+            <movie-list :movies="filteredMovies" @movieSelected="showMovieDetail"></movie-list>
         </ion-content>
     </ion-page>
 </template>
@@ -72,6 +72,9 @@ export default defineComponent({
         }
     },
     methods: {
+        showMovieDetail(movieId: string) {
+            console.log(`showing movie with id : ${movieId}`);
+        },
         updateMovieFilter(filter: MovieFilterInterface) {
             this.movieFilter = filter;
         },
