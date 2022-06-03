@@ -23,7 +23,7 @@
 
             <!-- Modal to show a movie detail -->
             <ion-modal :is-open="!!showedMovieDetail" @didDismiss="() => showMovieDetail()">
-                <ion-content>this is the content</ion-content>
+                <movie-detail v-bind="showedMovieDetail"></movie-detail>
             </ion-modal>
 
             <!-- movies filter -->
@@ -41,6 +41,7 @@ import { IonModal, IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader
 import { refreshOutline } from 'ionicons/icons';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieList from '@/components/MovieList.vue';
+import MovieDetail from '@/components/MovieDetail.vue';
 import { MovieFilterInterface } from '../types/common.d';
 import { FetchStatus } from '../types/common';
 import { get } from '@/services/MoviesService';
@@ -71,7 +72,7 @@ export default defineComponent({
             showedMovieDetail,
         };
     },
-    components: { IonModal, IonIcon, IonFab, IonFabButton, MovieList, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    components: { IonModal, IonIcon, IonFab, IonFabButton, MovieDetail, MovieList, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
     computed: {
         filteredMovies(): any {
             return this.movieFilter.genre == 'all' ?
