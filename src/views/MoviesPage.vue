@@ -21,6 +21,11 @@
                 </ion-fab-button>
             </ion-fab>
 
+            <!-- Modal to show a movie detail -->
+            <ion-modal :is-open="!!showedMovieDetail" @didDismiss="() => showMovieDetail()">
+                <ion-content>this is the content</ion-content>
+            </ion-modal>
+
             <!-- movies filter -->
             <movies-filter :genres="genres" @submit="updateMovieFilter" :selectedGenre="movieFilter.genre">
             </movies-filter>
@@ -32,7 +37,7 @@
 
 <script lang="ts"  >
 import { defineComponent } from 'vue';
-import { IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { IonModal, IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import { refreshOutline } from 'ionicons/icons';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieList from '@/components/MovieList.vue';
@@ -55,15 +60,18 @@ export default defineComponent({
         const movieFilter: MovieFilterInterface = {
             genre: selectedGenre || defaultGenre,
         };
+        const showedMovieDetail: any = undefined;
+
         return {
             refreshOutline, // icon
             isBusy: true, // Is this page currently busy ?
             movies,
             genres,
             movieFilter,
+            showedMovieDetail,
         };
     },
-    components: { IonIcon, IonFab, IonFabButton, MovieList, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    components: { IonModal, IonIcon, IonFab, IonFabButton, MovieList, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
     computed: {
         filteredMovies(): any {
             return this.movieFilter.genre == 'all' ?
@@ -72,8 +80,15 @@ export default defineComponent({
         }
     },
     methods: {
-        showMovieDetail(movieId: string) {
-            console.log(`showing movie with id : ${movieId}`);
+        showMovieDetail(movieId?: string) {
+            // If movie id not supplied,  set `showedMovieDetail` to `undefined` to close the dialog
+            if (!movieId) {
+                this.showedMovieDetail = undefined;
+            } else {
+                this.showedMovieDetail = this.movies.find((m: any) => {
+                    return m.Id === movieId;
+                });
+            }
         },
         updateMovieFilter(filter: MovieFilterInterface) {
             this.movieFilter = filter;
