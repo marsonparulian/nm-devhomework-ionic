@@ -22,10 +22,9 @@
             </ion-fab>
 
             <!-- Modal to show a movie detail -->
-            <ion-modal :is-open="!!showedMovieDetail" @didDismiss="() => showMovieDetail()" 
-            :swipe-to-close="true"
-            :presenting-element="$parent?.$refs.ionRouterOutlet" >
-                <movie-detail v-bind="showedMovieDetail" ></movie-detail>
+            <ion-modal :is-open="!!showedMovieDetail" @didDismiss="() => showMovieDetail()" :swipe-to-close="true"
+                :presenting-element="$parent?.$refs.ionRouterOutlet">
+                <movie-detail v-bind="showedMovieDetail"></movie-detail>
             </ion-modal>
 
             <!-- movies filter -->
@@ -39,7 +38,9 @@
 
 <script lang="ts"  >
 import { defineComponent } from 'vue';
-import { IonModal, IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import {
+    IonModal, IonIcon, IonFab, IonFabButton, IonLoading, IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
+} from '@ionic/vue';
 import { refreshOutline } from 'ionicons/icons';
 import MoviesFilter from "./MoviesFilter.vue";
 import MovieList from '@/components/MovieList.vue';
@@ -74,7 +75,9 @@ export default defineComponent({
             showedMovieDetail,
         };
     },
-    components: { IonModal, IonIcon, IonFab, IonFabButton, MovieDetail, MovieList, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+    components: {
+        IonModal, IonIcon, IonFab, IonFabButton, MovieDetail, MovieList, MoviesFilter, IonLoading, IonHeader, IonToolbar, IonTitle, IonContent, IonPage,
+    },
     computed: {
         filteredMovies(): any {
             return this.movieFilter.genre == 'all' ?
