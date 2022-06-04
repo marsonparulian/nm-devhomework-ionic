@@ -22,8 +22,10 @@
             </ion-fab>
 
             <!-- Modal to show a movie detail -->
-            <ion-modal :is-open="!!showedMovieDetail" @didDismiss="() => showMovieDetail()">
-                <movie-detail v-bind="showedMovieDetail"></movie-detail>
+            <ion-modal :is-open="!!showedMovieDetail" @didDismiss="() => showMovieDetail()" 
+            :swipe-to-close="true"
+            :presenting-element="$parent?.$refs.ionRouterOutlet" >
+                <movie-detail v-bind="showedMovieDetail" ></movie-detail>
             </ion-modal>
 
             <!-- movies filter -->
